@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios'
-//axios.defaults.baseURL=''
+axios.defaults.baseURL='http://192.168.0.26:8080';
+axios.defaults.timeout = 5000;
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 export default {
   data() {
     return {
@@ -19,38 +21,10 @@ export default {
       attrname: 'style',
       mstyle: {
         color: 'red'
-      },
-      list: [{
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      }],
-      editDialogFormVisible:true,
-      dialogVisible:false,
-      addform:{
-        date:'',
-        name:'',
-        address:''
       }
     }
   },
   mounted() {
-    this.init()
   },
   methods: {
     increment(id) {
@@ -62,15 +36,10 @@ export default {
     onSubmitPre() {
 
     },
-    init() {
-      axios.get("https://451ece6c-f618-436b-b4a2-517c6b2da400.mock.pstmn.io/list").then(response => {
-        console.log(response)
-      })
-    },
-    addUserSubmit()
-    {
-      console.log(this.addform.name);
-    }
+
+  },
+  computed:{
+   
   }
 }
 </script>
@@ -107,40 +76,7 @@ export default {
     </div>
   </div>
 
-  <div>
-    
-      <el-table :data="list" style="width: 100%">
-        <el-table-column prop="date" label="Date" width="180" />
-        <el-table-column prop="name" label="Name" width="180" />
-        <el-table-column prop="address" label="Address" />
-        <el-table-column label="操作">
-          <template #default="scope">
-            <el-button  type="primary"  size="small">编辑</el-button>
-            <el-button  type="danger" size="small">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
   
-
-      <el-dialog title="添加用户" v-model="dialogVisible">
-        <el-form :model="addform" label-width="80px" >
-          <el-form-item label="日期" prop="date">
-            <el-input  auto-complete="off" v-model="addform.date"></el-input>
-          </el-form-item>
-          <el-form-item label="姓名" prop="name">
-            <el-input  auto-complete="off" v-model="addform.name"></el-input>
-          </el-form-item>
-          <el-form-item label="地址" prop="address">
-            <el-input  auto-complete="off" v-model="addform.address"></el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="editDialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addUserSubmit">确 定</el-button>
-        </div>
-      </el-dialog>
-      <el-button  type="primary"  size="small" class="elbtn" @click="dialogVisible = true">添加</el-button>
-  </div>
 </template>
 
 <style scoped>
