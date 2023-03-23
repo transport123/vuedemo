@@ -1,15 +1,30 @@
 <script>
 import axios from 'axios'
-import {nextTick, onMounted,ref} from 'vue'
+import {nextTick, onMounted,ref,getCurrentInstance, defineComponent} from 'vue'
 
 axios.defaults.baseURL='http://192.168.0.26:8080';
 axios.defaults.timeout = 5000;
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-const scrollDiv = ref(null)
-const addDialogRef = ref(null)
 
-export default {
- 
+
+export default defineComponent({
+ setup(){
+  const scrollDiv = ref(null)
+const adddialogg = ref(null)
+  onMounted(()=>{
+    console.log("onmounted")
+    console.log(scrollDiv.value);
+    console.log(adddialogg.value);
+    scrollDiv.value.addEventListener('click',(e)=>{console.log(e)},true);
+    adddialogg.value.addEventListener('click',(e)=>{console.log(e)},true);
+    console.log('over');
+
+  });
+  return{
+    adddialogg,
+    scrollDiv
+  }
+ },
   data() {
     return {
       showskeleton:true,
@@ -157,7 +172,6 @@ export default {
   },
   mounted() {
     this.init()
-    console.log(scrollDiv.value)
   },
 
   methods: {
@@ -188,9 +202,6 @@ export default {
     },
     addUserSubmit()
     {
-      let addDialogRef = this.$refs.addDialogRef;
-      console.log(addDialogRef)
-      addDialogRef.addEventListener('click',this.scrollListener);
       if(!this.checkValidate(this.addform))
       {
         return;
@@ -302,19 +313,22 @@ export default {
     opened()
     {
       console.log(addDialogRef.value);
+      let skelet = document.getElementById('dialogAdd')
+      console.log(skelet);
+
     }
   },
-}
+})
 </script>
 
 <template>
   <div style="overflow-y: scroll;height: 120vh;border: 5px solid black;padding-bottom: 10px; padding-right: 100px;"   ref="scrollDiv" >
-      <el-skeleton v-show="showskeleton"/>
+      <el-skeleton v-show="showskeleton"  id="skele"/>
       <div style="border: 1px solid green;height: 300px;overflow-y: scroll; padding: 10px;">
       <div style="border: 1px solid red;height: 600px;"></div>
       </div>
-      <div v-show="!showskeleton">
-        <el-table :data="list" style="width: 100%">
+      <div v-show="!showskeleton" ref="adddialogg">
+        <el-table :data="list" style="width: 100%" >
         <el-table-column prop="name" label="姓名" width="180" />
         <el-table-column prop="age" label="年龄" width="180" />
         <el-table-column prop="gender" label="性别">
@@ -324,7 +338,7 @@ export default {
           </el-table-column>
         <el-table-column label="操作">
           <template #default="scope">
-            <el-button  type="primary"  size="small" @click="editUser(scope.row)">编辑</el-button>
+            <el-button  type="primary"  size="small" @click="editUser(scope.row)" >编辑</el-button>
             <el-button  type="danger" size="small" @click="deleteUser(scope.row.userId)">删除</el-button>
           </template>
         </el-table-column>
@@ -332,10 +346,10 @@ export default {
       <el-button  type="primary"  size="small" class="elbtn" @click="adduser" style="position: fixed;z-index: 10000;top: 0px;right:0px">添加</el-button>
 
       </div>
-      <el-dialog title="添加用户" v-model="addDialogVisible" :lock-scroll="false" ref="addDialogRef" @opened="opened">
+      <el-dialog title="添加用户" v-model="addDialogVisible" :lock-scroll="false"  @opened="opened" >
         <el-form :model="addform" label-width="80px"  >
-          <el-form-item label="姓名" prop="date">
-            <el-input  auto-complete="off" v-model="addform.name"></el-input>
+          <el-form-item label="姓名" prop="date" >
+            <el-input  auto-complete="off" v-model="addform.name" ></el-input>
           </el-form-item>
           <el-form-item label="年龄" prop="name">
             <el-input  auto-complete="off" v-model="addform.age"></el-input>
@@ -349,14 +363,14 @@ export default {
           </el-form-item>
         </el-form>
 
-        <div slot="footer" class="dialog-footer">
+        <div slot="footer" class="dialog-footer" >
           <el-button @click="addDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="addUserSubmit" v-bind:disabled="addConfirmAble">确 定</el-button>
         </div>
       </el-dialog>
 
 
-      <el-dialog title="编辑用户" v-model="editDialogVisible" :lock-scroll="false">
+      <el-dialog title="编辑用户" v-model="editDialogVisible" :lock-scroll="false" >
         <el-form :model="editform" label-width="80px" >
           <el-form-item label="姓名" prop="name">
             <el-input  auto-complete="off" v-model="editform.name"></el-input>
