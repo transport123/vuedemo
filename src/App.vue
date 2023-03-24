@@ -1,8 +1,6 @@
 <script>
-import axios from 'axios'
-axios.defaults.baseURL='http://192.168.0.26:8080';
-axios.defaults.timeout = 5000;
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+import { debounce } from 'lodash';
+
 export default {
   data() {
     return {
@@ -24,7 +22,15 @@ export default {
       }
     }
   },
+  created(){
+    this.betterDebounce=debounce(this.handleDebounce,5000);
+    //通过每次组件创建时都创建一个debounce实例，为每个组件维护自己的状态，就不会出错
+    //此时组件内只要绑定this.betterDebounce函数就好了，它其实就是this的一个函数类型的属性
+  },
   mounted() {
+  },
+  unmounted() {
+    this.betterDebounce.cancel();
   },
   methods: {
     increment(id) {
@@ -36,7 +42,16 @@ export default {
     onSubmitPre() {
 
     },
-
+    handleDebounceDefault:debounce(function(){
+      //do-sth
+      //这种方式只在模块加载时创建一个debounce实例，多个组件会共用此实例。由于debounce内部会维护‘时间状态’来实现防抖，多个组件的状态不同就会造成问题
+    },500),
+    functionF:function(){
+      //这种写法也是一种申明函数的方法
+    },
+    handleDebounce(){
+      //do-sth
+    }
   },
   computed:{
    
@@ -45,7 +60,7 @@ export default {
 </script>
 
 <template>
-  <div v-if=false>
+  <div v-if=true>
     <span v-html="vhtml"></span> <!--尽量不用这个属性，不安全-->
     <header>
 
