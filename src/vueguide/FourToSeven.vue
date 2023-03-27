@@ -51,10 +51,10 @@ const computeSet =computed({
     }
 })
 
-onMounted(()=>{
-    console.log(refValue)
+function setValue(){
+    computeSet.value=100;
+}
 
-})
 
 function changeRefValue()
 {
@@ -91,13 +91,49 @@ function changeRefValue()
     //2，对象本身在更改时能触发‘刷新’，否则永远无法进入‘全局刷新’这个阶段，dom树也就不会改变
     //上述例子中由于authorRef更换对象，新对象更改并不会触发刷新，所以即使值改变了也不会改变dom中的值
     //理解上应该有偏差，暂时先这么理解。
+
 }
 
-function setValue(){
-    computeSet.value=100;
+//class 与 style绑定
+const isActive = ref(true)
+const isError=ref(true)
+
+const computeNoError=ref(null)
+const computeError=ref({type:'fatal'})
+
+const arrActive = ref('active')
+const arrError = ref('text-error')
+
+
+const fontSize=ref(20)
+const styleColor=ref({
+    color:'blue',
+    background:'green'
+})
+
+const styleFont=ref({
+    fontSize: '25px '
+})
+const isStyleFont=ref(false)
+
+const objStyle=ref({
+    active:isActive,
+    'text-error':isError
+})
+
+const computedStyle=computed(()=>{
+return{
+    active: isActive.value && !computeError.value,
+    'text-error': computeError.value && computeError.value.type==='fatal'
 }
+}
+)
 
 
+onMounted(()=>{
+    console.log(refValue)
+
+})
 </script>
 
 <template>
@@ -113,5 +149,53 @@ function setValue(){
 
     </div>
 
+    <div>
+        <p  class="static" :class="{active:isActive,'text-error':isError}">内联字面量class的绑定</p>
 
+        <p  class="objstatic" :class="objStyle">对象样式的绑定</p>
+
+        <p  class="computestatic" :class="computedStyle">计算样式的绑定</p>
+
+        <p :class="[isActive?arrActive:'',arrError]"> 数组绑定样式1</p>
+
+        <p :class="[{active:isActive},arrError]"> 数组绑定样式2</p>
+
+        <p :style="styleColor">内联style绑定1</p>
+
+        <p :style="{'fontSize':fontSize+'px'}">内联style绑定2</p>
+
+        <p :style="[styleColor,styleFont]">内联style数组绑定</p>
+
+        <p :style="[styleColor,{styleFont:isStyleFont}]">内联style数组条件绑定</p>
+
+
+    </div>
 </template>
+
+<style>
+.active{
+    border:1px solid black
+}
+
+.text-error{
+    color: red;
+}
+.static{
+    position:fixed;
+    top:0;
+    right:0
+}
+
+.objstatic{
+    position:fixed;
+    top:100px;
+    right:0
+}
+
+.computestatic{
+    position:fixed;
+    top:200px;
+    right:0
+}
+
+</style>
