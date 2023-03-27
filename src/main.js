@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import APP from './vueguide/FourToEight.vue'
+import APP from './basic/EightToTen.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 const app = createApp(APP)
