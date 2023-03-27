@@ -129,6 +129,35 @@ return{
 }
 )
 
+const vueGood = ref(true)
+const vueType = ref(0)
+
+const users=ref([{name:'harry',isActive:true},{name:'ronn',isActive:false}]);
+const activeusers=computed(()=>{
+        return users.value.filter(user=>user.isActive)
+    })
+
+const cUsers=[ref({name:'harry',isActive:true}),ref({name:'ronn',isActive:false})]
+const activeCUsers=computed(()=>{
+    return cUsers.filter(user=>user.value.isActive)
+})
+
+const parentMsg=ref('parentMessage')
+const items=ref([{message:'foo',id:1},{message:'bar',id:2}])
+const innerItem=ref([[{message:'foo',id:1},{message:'bar',id:2}],[{message:'foo',id:3},{message:'bar',id:4}]])
+
+const objKeys=ref({
+    name:'objobj',
+    type:'plain',
+    base:false
+})
+
+function snape()
+{
+    users.value.push({name:'snape',isActive:true})
+    cUsers.push(ref({name:'snape',isActive:true}));
+    //cUsers本身不是响应式对象，所以push后也不会触发任何改变
+}
 
 onMounted(()=>{
     console.log(refValue)
@@ -167,9 +196,66 @@ onMounted(()=>{
         <p :style="[styleColor,styleFont]">内联style数组绑定</p>
 
         <p :style="[styleColor,{styleFont:isStyleFont}]">内联style数组条件绑定</p>
+    </div>
 
+    <div>
+        <h1 v-if="vueGood">if:vue is good</h1>
+        <h1 v-else>else:vue is bad</h1>
+        <button @click="vueGood=!vueGood">vue好吗</button>
+        <h1 v-show="vueGood">show:vue is good</h1>
+
+        <h1 v-if="vueType===0">i don't use vue</h1>
+        <h1 v-else-if="vueType===2">i use vue2</h1>
+        <h1 v-else>i use vue3</h1>
 
     </div>
+    <!--v-for与v-if的规范使用方式
+    1,通过computed过滤出合法数据，只使用v-for
+    2，通过template包裹li，将if和for分开在不同的标签上-->
+    <ul>
+        <li v-for="user in activeusers">
+            {{user.name }}
+        </li>
+    </ul>
+
+    <button @click="snape">添加snape</button>
+
+    <ul>
+        <template v-for="user in users">
+            <li v-if="user.isActive">
+                {{user.name}}
+            </li>
+        </template>
+    </ul>
+    <hr/>
+
+    <ul>
+        <li v-for="(item, index) in items" :key="item.id">
+           {{ parentMsg }}-{{index}}-{{item.message }}
+        </li>
+
+        <li v-for="{message} in items">
+           {{ parentMsg }}-{{message }}
+        </li>
+    </ul>
+
+    <ul>
+        <li v-for="item of innerItem">
+            <span v-for="childItem of item">
+               {{ item.length }} - {{childItem.message}} - {{ childItem.length }}
+            </span>
+        </li>
+    </ul>
+
+    <ul>
+        <li v-for="(value,key,index) of objKeys">
+            {{ key }}.{{ value }}:{{ index }}
+        </li>
+    </ul>
+    <p v-for="(item, index) in items">
+        {{ parentMsg }}-{{index}}-{{item.message }}
+    </p>
+    <span v-for="i in 15"> i: {{ i }} </span>
 </template>
 
 <style>
