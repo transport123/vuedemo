@@ -1,5 +1,5 @@
 <script setup>
-import {ref,watch,reactive,watchEffect} from 'vue'
+import {ref,watch,reactive,watchEffect,onMounted} from 'vue'
 const basicNum = ref(0)
 
 
@@ -65,6 +65,21 @@ watchEffect(async ()=>{
     }
 })
 
+const plainInput=ref(null)
+const datalist=ref([{name:'jack',age:20},{name:'peter',age:20},{name:'frank',age:20}])
+const domRefs=ref([])
+
+onMounted(()=>{
+    console.log('mounted')
+
+    console.log(plainInput.value)
+    plainInput.value.focus()
+    for(let i=0;i<domRefs.value.length;i++)
+    {
+        console.log(domRefs.value[i])
+    }
+})
+
 function changeProxy()
 {
     objNum.value={count:10}
@@ -73,6 +88,11 @@ function changeProxy()
 function changeProxyValue()
 {
     objNum.value.count=100
+}
+
+function pTempRef(el)
+{
+    console.log(el)
 }
 
 </script>
@@ -85,4 +105,17 @@ function changeProxyValue()
         <button @click="outObj.child.id++">改变child属性值</button>
         <button @click="outObj.child={name:'after',id:1107}">改变child本身</button>
     </div>
+    <div>
+        <input ref="plainInput" id="plaininput"/>
+        <ul>
+            <li v-for="person in datalist" ref="domRefs">
+                {{ person.name }}
+            </li>
+        </ul>
+        <input :ref="pTempRef"/>
+    </div>
+
+
+
+
 </template>
