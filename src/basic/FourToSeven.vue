@@ -79,7 +79,7 @@ function changeRefValue()
     authorRef.name='park'
 
     
-    obj.bar.value=20;//如果注册该语句authorRef和authorReact就始终不会改变
+    obj.bar.value=20;//如果注释该语句authorRef和authorReact就始终不会改变
     console.log(refValue)
     console.log(authorRef)
     console.log(authorReact)

@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import APP from './basic/LastThree.vue'
+import APP from './componentdetail/ComponentFoundation.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 const app = createApp(APP)
