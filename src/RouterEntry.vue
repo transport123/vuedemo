@@ -23,7 +23,7 @@ function changeLink()
             组件基础
         </RouterLink>
 
-        <RouteLink :to="routeLinkRef" activeClass="aClass" inactiveClass="iaClass">
+        <RouteLink :to="routeLinkRef" activeClass="aClass" inactiveClass="iaClass" bbb="ttt" xxx="bibibi">
             自定义link
         </RouteLink>
    
