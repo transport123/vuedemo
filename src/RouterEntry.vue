@@ -31,6 +31,8 @@ function changeLink()
     </header>
     <div style="height: 100px;">
     <button @click="changeLink">改变链接</button>
+    <span class="spanafter">这是一些文字</span>
+
     </div>
 </div>
     <RouterView/>
@@ -51,5 +53,8 @@ function changeLink()
 }
 .iaClass{
     color:darkslategrey
+}
+.spanafter::after{
+    content:"where am i"
 }
 </style>
