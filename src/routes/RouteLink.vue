@@ -32,7 +32,7 @@ function showLog(fn,event)
 
     <!--组件内的标签其实就是使用了插槽，此时想在插槽内部访问组件的属性值，需要v-slot传递 -->
     <RouterLink v-else v-bind="$props" @click="showLog" v-slot="{isActive,href,navigate}" custom sss="999">
-        <a :href="href"  @click="showLog(navigate,$event)" :class="isActive?activeClass:inactiveClass" v-bind="$attrs" 
+        <a :href="href"  @click="navigate" :class="isActive?activeClass:inactiveClass" v-bind="$attrs" 
         ppp="0000" inactiveClass>
         <!--因为inactiveclass并不是RouterLink的prop-->
             <slot/>
