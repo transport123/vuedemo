@@ -1,7 +1,7 @@
 <script setup>
 import RouteLink from './routes/RouteLink.vue'
 import {ref} from 'vue'
-const routeLinkRef = ref('/foo/List')
+const routeLinkRef = ref('/List')
 
 const baseurl=import.meta.env.BASE_URL
 console.log(baseurl)
@@ -9,7 +9,7 @@ console.log(baseurl)
 function changeLink()
 {
     if(routeLinkRef.value.startsWith('http'))
-        routeLinkRef.value='/foo/List'
+        routeLinkRef.value='/List'
     else
         routeLinkRef.value='http://www.baidu.com'
 
@@ -19,8 +19,8 @@ function changeLink()
 <template>
 <div>
     <header style="padding-top: 10px;">
-        <RouterLink to="/foo/">app首页</RouterLink>
-        <RouterLink to="/foo/ComponentFoundation" class="routerlink">
+        <RouterLink to="/">app首页</RouterLink>
+        <RouterLink to="/ComponentFoundation" class="routerlink">
             组件基础
         </RouterLink>
 
@@ -36,7 +36,7 @@ function changeLink()
 
     </div>
 </div>
-    <RouterView/>
+    <RouterView />
 </template>
 
 <style>

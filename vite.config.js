@@ -6,7 +6,7 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
   root:'./',//项目根目录，在使用开发服务器时起作用，就像nginx的location一样，指定静态服务器的根目录
-  base:'/foo/',
+  base:'/dist/',
   plugins: [vue()],
   resolve: {
     alias: {

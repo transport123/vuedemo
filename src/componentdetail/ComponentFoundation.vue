@@ -1,6 +1,5 @@
 <script setup>
 import {ref} from 'vue'
-import element from 'element-plus'
 import SimpleComponent from './SimpleComponent.vue';
 import HomeTab from './HomeTab.vue';
 import ArchiveTab from './ArchiveTab.vue';
