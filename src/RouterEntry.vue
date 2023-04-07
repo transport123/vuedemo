@@ -24,10 +24,13 @@ function changeLink()
             组件基础
         </RouterLink>
 
-        <RouteLink :to="routeLinkRef" activeClass="aClass" inactiveClass="iaClass" bbb="ttt" xxx="bibibi">
+        <RouteLink :to="routeLinkRef" activeClass="aClass" inactiveClass="iaClass">
             自定义link
         </RouteLink>
-   
+        
+        <RouteLink to="/ComponentProps" class="routerlink">
+            自定义props
+        </RouteLink>
 
     </header>
     <div style="height: 100px;">
