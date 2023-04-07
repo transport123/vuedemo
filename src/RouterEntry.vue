@@ -36,6 +36,11 @@ function changeLink()
             自定义emits
         </RouteLink>
 
+        <RouteLink to="/ComponentVModel" class="routerlink">
+            组件中的VMODEL
+        </RouteLink>
+        
+
     </header>
     <div style="height: 100px;">
     <button @click="changeLink">改变链接</button>
