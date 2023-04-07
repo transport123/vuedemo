@@ -8,6 +8,7 @@ const App =()=>import('./App.vue')
 const ComponentFoundation = ()=>import('./componentdetail/ComponentFoundation.vue')
 const List = ()=>import('./pages/List.vue')//对于vue-router不需要使用defineAsyncComponent，因为路由本身就是动态导入的
 const ComponentProps=()=>import('./intocomponent/props/ComponentProps.vue')
+const ComponentEmits=()=>import('./intocomponent/emits/ComponentEmits.vue')
 
 // import App from './App.vue'
 // import ComponentFoundation from './componentdetail/ComponentFoundation.vue'
@@ -20,7 +21,8 @@ const routes = [
   {path: '/', component: App },
   {path:'/ComponentFoundation',component:ComponentFoundation},
   {path:'/List.html',component:List},
-  {path:'/ComponentProps',component:ComponentProps}
+  {path:'/ComponentProps',component:ComponentProps},
+  {path:'/ComponentEmits',component:ComponentEmits}
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

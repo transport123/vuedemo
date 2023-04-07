@@ -32,6 +32,10 @@ function changeLink()
             自定义props
         </RouteLink>
 
+        <RouteLink to="/ComponentEmits" class="routerlink">
+            自定义emits
+        </RouteLink>
+
     </header>
     <div style="height: 100px;">
     <button @click="changeLink">改变链接</button>
