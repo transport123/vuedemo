@@ -7,7 +7,7 @@ import element from 'element-plus'
 const App =()=>import('./App.vue')
 const ComponentFoundation = ()=>import('./componentdetail/ComponentFoundation.vue')
 const List = ()=>import('./pages/List.vue')//对于vue-router不需要使用defineAsyncComponent，因为路由本身就是动态导入的
-const ComponentProps=()=>import('./intocomponent/ComponentProps.vue')
+const ComponentProps=()=>import('./intocomponent/props/ComponentProps.vue')
 
 // import App from './App.vue'
 // import ComponentFoundation from './componentdetail/ComponentFoundation.vue'
@@ -19,7 +19,7 @@ const ComponentProps=()=>import('./intocomponent/ComponentProps.vue')
 const routes = [
   {path: '/', component: App },
   {path:'/ComponentFoundation',component:ComponentFoundation},
-  {path:'/List',component:List},
+  {path:'/List.html',component:List},
   {path:'/ComponentProps',component:ComponentProps}
 ]
 

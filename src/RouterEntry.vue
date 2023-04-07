@@ -1,7 +1,7 @@
 <script setup>
 import RouteLink from './routes/RouteLink.vue'
 import {ref} from 'vue'
-const routeLinkRef = ref('/List')
+const routeLinkRef = ref('/List.html')
 
 const baseurl=import.meta.env.BASE_URL
 console.log(baseurl)
@@ -9,7 +9,7 @@ console.log(baseurl)
 function changeLink()
 {
     if(routeLinkRef.value.startsWith('http'))
-        routeLinkRef.value='/List'
+        routeLinkRef.value='/List.html'
     else
         routeLinkRef.value='http://www.baidu.com'
 

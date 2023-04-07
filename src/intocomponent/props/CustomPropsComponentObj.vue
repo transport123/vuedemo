@@ -1,5 +1,5 @@
 <script setup>
-import {Person} from '../rawjs/person'
+import {Person} from '/src/rawjs/person'
 const props = defineProps({
     foo:String,
     fooObj:{
