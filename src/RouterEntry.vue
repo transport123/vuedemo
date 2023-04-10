@@ -43,6 +43,10 @@ function changeLink()
         <RouteLink to="/ComponentAttr" class="routerlink">
             透传属性
         </RouteLink>
+
+        <RouteLink to="/ComponentSlot" class="routerlink">
+            插槽
+        </RouteLink>
         
     </header>
     <div style="height: 100px;">

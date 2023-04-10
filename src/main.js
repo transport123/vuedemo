@@ -11,6 +11,7 @@ const ComponentProps=()=>import('./intocomponent/props/ComponentProps.vue')
 const ComponentEmits=()=>import('./intocomponent/emits/ComponentEmits.vue')
 const ComponentVModel=()=>import('./intocomponent/vmodel/ComponentVModel.vue')
 const ComponentAttr=()=>import('./intocomponent/attrs/ComponentAttrs.vue')
+const ComponentSlot=()=>import('./intocomponent/slots/CustomSlot.vue')
 
 // import App from './App.vue'
 // import ComponentFoundation from './componentdetail/ComponentFoundation.vue'
@@ -26,7 +27,8 @@ const routes = [
   {path:'/ComponentProps',component:ComponentProps},
   {path:'/ComponentEmits',component:ComponentEmits},
   {path:'/ComponentVModel',component:ComponentVModel},
-  {path:'/ComponentAttr',component:ComponentAttr}
+  {path:'/ComponentAttr',component:ComponentAttr},
+  {path:'/ComponentSlot',component:ComponentSlot}
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
