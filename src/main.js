@@ -10,6 +10,7 @@ const List = ()=>import('./pages/List.vue')//对于vue-router不需要使用defi
 const ComponentProps=()=>import('./intocomponent/props/ComponentProps.vue')
 const ComponentEmits=()=>import('./intocomponent/emits/ComponentEmits.vue')
 const ComponentVModel=()=>import('./intocomponent/vmodel/ComponentVModel.vue')
+const ComponentAttr=()=>import('./intocomponent/attrs/ComponentAttrs.vue')
 
 // import App from './App.vue'
 // import ComponentFoundation from './componentdetail/ComponentFoundation.vue'
@@ -24,7 +25,8 @@ const routes = [
   {path:'/List.html',component:List},
   {path:'/ComponentProps',component:ComponentProps},
   {path:'/ComponentEmits',component:ComponentEmits},
-  {path:'/ComponentVModel',component:ComponentVModel}
+  {path:'/ComponentVModel',component:ComponentVModel},
+  {path:'/ComponentAttr',component:ComponentAttr}
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
