@@ -1,5 +1,6 @@
 <script setup>
 import FancyButton from './FancyButton.vue';
+import MultiSlots from './MultiSlots.vue';
 </script>
 
 <template>
@@ -9,7 +10,21 @@ import FancyButton from './FancyButton.vue';
         <img style="width: 50px;height: 50px;background-color: aquamarine;vertical-align: middle;"/>
         </FancyButton>
         <br/>
-       
+        
+        <MultiSlots>
+            <template v-slot:redp="{redgreeting,rcount}">
+                redtext
+                <span style="font-size: 3em;">{{redgreeting}}{{ rcount }}</span>
+            </template>
+            noname slot1
+            <template #bluep="blueprops" >
+                bluetext<br/>
+                {{ blueprops.count }}<br/>
+                {{ blueprops.text }}
+            </template>
+            noname slot2
+        </MultiSlots>
+
     </div>
    
 </template>
