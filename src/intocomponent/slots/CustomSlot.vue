@@ -6,10 +6,20 @@ import MultiSlots from './MultiSlots.vue';
 <template>
     <div style="background-color: bisque;">
         <FancyButton>
-        <span style="vertical-align: bottom;display: inline-block;border: 1px solid red; line-height: auto;" >clickme</span>
-        <img style="width: 50px;height: 50px;background-color: aquamarine;vertical-align: middle;"/>
+            a
+        <span style="border: 1px solid red; " >clickme clickme clickme clickme clickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickme</span>
+        <!-- <img style="width: 50px;height: 40px;background-color: aquamarine;"/> -->
         </FancyButton>
         <br/>
+
+        <span style="display: inline-block;height: 100px; line-height:100px;border: 1px solid black;text-align: center;"> 
+        <span style="border: 1px solid red; vertical-align: middle;display: inline-block;line-height: normal;" >clickme clickme clickme clickme clickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickmeclickme clickme clickme clickme</span> 
+        </span>
+
+
+        <span style="display: inline-block;line-height: 100px;border: 1px solid black">
+        <span style="vertical-align: middle;">aa</span>
+        </span>
         
         <MultiSlots>
             <template v-slot:redp="{redgreeting,rcount}">
