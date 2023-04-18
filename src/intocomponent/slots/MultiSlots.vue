@@ -21,5 +21,10 @@ const greetingred=ref('hellored')
 
             </slot>
         </p>
+        <span>
+            <slot name="noProp">
+
+            </slot>
+        </span>
     </div>
 </template>

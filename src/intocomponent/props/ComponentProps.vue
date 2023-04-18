@@ -2,6 +2,7 @@
 import { ref,reactive } from 'vue';
 import ArrProps from './CustomPropsComponentArr.vue'
 import ObjProps from './CustomPropsComponentObj.vue'
+import Navigation from '../nav/navigation.vue';
 //ref的好处就是用一个引用将目标对象包裹了起来，且响应链为ref自身，那么在深响应的情况下，只要这个ref本身没有被替换，响应链就会一直存在
 const fooObj = ref({name:"haland",number:22})
 const traditionObj = {
@@ -18,6 +19,39 @@ const reactiveObj=reactive({
     },
     index:0
 })
+
+const pathData=[{
+    title:'一级标题A',
+    children:[{
+        title:'二级标题A',
+        children:[{
+            title:'三级标题AA',
+            children:[]
+        },{
+            title:'三级标题AB',
+            children:[]
+        }]
+    },{
+        title:'二级标题B',
+        children:[]
+    }]
+},{
+    title:'一级标题B',
+    children:[{
+        title:'二级标题A',
+        children:[{
+            title:'三级标题AA',
+            children:[]
+        },{
+            title:'三级标题AB',
+            children:[]
+        }]
+    },{
+        title:'二级标题B',
+        children:[]
+    }]
+}]
+const refPath = ref(pathData)
 
 function showObj(){
     let child = traditionObj.child
@@ -67,6 +101,10 @@ function acceptReactIndex(index)
             <button @click="acceptReactIndex(reactiveObj.index)">改变React普通属性值</button>
             <!--很明显这里的传参是值的拷贝，那么引用就丢失了，所以响应也就断了-->
             reactiveObj:{{ reactiveObj }}
+        </div>
+
+        <div>
+            <Navigation :data-source="pathData"></Navigation>
         </div>
     </div>
 </template>

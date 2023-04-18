@@ -50,9 +50,14 @@ import MultiSlots from './MultiSlots.vue';
                 noname slot2
                 {{ defaults.defaultname }}{{ defaults.defaultcount }}
                 hello
-                <!--注意，-->
+                <!--注意，当具名插槽存在时，如果还想使用匿名插槽并通过插槽作用域机制传递prop，匿名插槽也必须写在template中-->
             </template>
            
+            <template #noProp>
+                <div style="font-size: 3rem;">
+                    this is a named slot!
+                </div>
+            </template>
         </MultiSlots>
 
     </div>
