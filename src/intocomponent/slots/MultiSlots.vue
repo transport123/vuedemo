@@ -17,7 +17,7 @@ const greetingred=ref('hellored')
             </slot>
         </p>
         <p>
-            <slot>
+            <slot :defaultname="'defaultslot'" :defaultcount="15">
 
             </slot>
         </p>
