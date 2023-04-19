@@ -1,18 +1,19 @@
-import { createApp } from 'vue'
- 
+import { createApp, ref } from 'vue'
+
 import 'element-plus/dist/index.css'
-import {createRouter,createWebHashHistory,createWebHistory} from 'vue-router';
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import Entry from './RouterEntry.vue'
 import element from 'element-plus'
-const App =()=>import('./App.vue')
-const ComponentFoundation = ()=>import('./componentdetail/ComponentFoundation.vue')
-const List = ()=>import('./pages/List.vue')//对于vue-router不需要使用defineAsyncComponent，因为路由本身就是动态导入的
-const ComponentProps=()=>import('./intocomponent/props/ComponentProps.vue')
-const ComponentEmits=()=>import('./intocomponent/emits/ComponentEmits.vue')
-const ComponentVModel=()=>import('./intocomponent/vmodel/ComponentVModel.vue')
-const ComponentAttr=()=>import('./intocomponent/attrs/ComponentAttrs.vue')
-const ComponentSlot=()=>import('./intocomponent/slots/CustomSlot.vue')
-const di=()=>import('./intocomponent/inject/provider.vue')
+const App = () => import('./App.vue')
+const ComponentFoundation = () => import('./componentdetail/ComponentFoundation.vue')
+const List = () => import('./pages/List.vue')//对于vue-router不需要使用defineAsyncComponent，因为路由本身就是动态导入的
+const ComponentProps = () => import('./intocomponent/props/ComponentProps.vue')
+const ComponentEmits = () => import('./intocomponent/emits/ComponentEmits.vue')
+const ComponentVModel = () => import('./intocomponent/vmodel/ComponentVModel.vue')
+const ComponentAttr = () => import('./intocomponent/attrs/ComponentAttrs.vue')
+const ComponentSlot = () => import('./intocomponent/slots/CustomSlot.vue')
+const di = () => import('./intocomponent/inject/provider.vue')
+const asyncComponent = () => import('./intocomponent/async-component/async-page.vue')
 
 // import App from './App.vue'
 // import ComponentFoundation from './componentdetail/ComponentFoundation.vue'
@@ -22,15 +23,16 @@ const di=()=>import('./intocomponent/inject/provider.vue')
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
 const routes = [
-  {path: '/', component: App },
-  {path:'/ComponentFoundation',component:ComponentFoundation},
-  {path:'/List.html',component:List},
-  {path:'/ComponentProps',component:ComponentProps},
-  {path:'/ComponentEmits',component:ComponentEmits},
-  {path:'/ComponentVModel',component:ComponentVModel},
-  {path:'/ComponentAttr',component:ComponentAttr},
-  {path:'/ComponentSlot',component:ComponentSlot},
-  {path:'/di',component:di}
+  { path: '/', component: App },
+  { path: '/ComponentFoundation', component: ComponentFoundation },
+  { path: '/List.html', component: List },
+  { path: '/ComponentProps', component: ComponentProps },
+  { path: '/ComponentEmits', component: ComponentEmits },
+  { path: '/ComponentVModel', component: ComponentVModel },
+  { path: '/ComponentAttr', component: ComponentAttr },
+  { path: '/ComponentSlot', component: ComponentSlot },
+  { path: '/di', component: di },
+  { path: '/asyncComponent', component: asyncComponent }
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
@@ -44,8 +46,8 @@ const router = createRouter({
 
 const app = createApp(Entry)
 app.use(router)
-app.config.errorHandler=(err)=>{
-    
+app.config.errorHandler = (err) => {
+
 }//通过config来配置应用级的信息，注意一定要在挂载前配置好
 /*import('element-plus').then((element)=>{
 })*/
@@ -54,5 +56,12 @@ app.config.errorHandler=(err)=>{
 
 app.use(element)
 app.component()//通过component添加自定义组件，使得组件在app内都是可用的
+const loaded = ref(false)
+app.provide('asyncComponentLoaded', loaded)
+app.provide('loadAsyncComponent',loadAsyncComponent)
 app.mount('#app')
 //app可以创建多个，分别挂载到一个大页面上的小部分上
+
+function loadAsyncComponent() {
+  loaded.value = true
+}

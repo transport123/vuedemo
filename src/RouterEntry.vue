@@ -51,6 +51,10 @@ function changeLink()
         <RouteLink to="/di" class="routerlink">
             依赖注入
         </RouteLink>
+
+        <RouteLink to="/asyncComponent" class="routerlink">
+            异步组件
+        </RouteLink>
         
     </header>
     <div style="height: 100px;">
