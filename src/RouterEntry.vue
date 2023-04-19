@@ -47,6 +47,10 @@ function changeLink()
         <RouteLink to="/ComponentSlot" class="routerlink">
             插槽
         </RouteLink>
+
+        <RouteLink to="/di" class="routerlink">
+            依赖注入
+        </RouteLink>
         
     </header>
     <div style="height: 100px;">
